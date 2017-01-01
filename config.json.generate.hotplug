@@ -2,6 +2,21 @@ cat << CTAG
 {
 	name:HOTPLUG,
 		elements:[
+			`if [ -f "/sys/kernel/boeffla_config_mode/enabled" ]; then
+                               BCM=\`$BB cat /sys/kernel/boeffla_config_mode/enabled\`;
+                               $BB echo '{ SPane:{
+                                       title:"Boeffla Config Mode",
+									}},
+									{ SCheckBox:{
+										description:"BCM will stop big cores shutting down on low battery",
+										label:"Enable BCM",
+                                        default:'$BCM',
+                                        action:"generic /sys/kernel/boeffla_config_mode/enabled",
+									}},
+									{ SSpacer:{
+										height: 1
+									}}'
+				fi`
 			{ SPane:{
 				title:"Info"
 			}},
